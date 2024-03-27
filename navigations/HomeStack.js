@@ -1,24 +1,19 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-
-
 import Main from '../screens/Main';
-
 import Adult from '../screens/Adult';
 import Kitten from '../screens/Kitten';
 import Mature from '../screens/Mature';
 import Senior from '../screens/Senior';
-import Test from '../components/KittenDoc.js/Test';
-
+import Information from '../screens/Information';
 const Stack = createStackNavigator();
-
 export default function HomeStack() {
   return (
     <Stack.Navigator initialRouteName="Main">
       <Stack.Screen
         name="Main"
         component={Main}
-        options={{ title: "Home" }}
+        options={{ title: "Let's adopt!" }}
       />
       <Stack.Screen
         name="Kitten"
@@ -41,10 +36,11 @@ export default function HomeStack() {
         options={{ title: "Senior" }}
       />
       <Stack.Screen
-        name="Bob"
-        component={Test}
-        options={{ title: "Bob" }}
+        name="Information"
+        component={Information}
+        options={{ title: "Information" }}
       />
+      
    
      </Stack.Navigator>
   );
