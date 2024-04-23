@@ -9,11 +9,10 @@ import Phonenumberstorage from "../storages/Phonenumberstorage";
 
 export default function Lookingforhome() {
     const [Height, setHeight] = useState(0);
-    const [Name, setName] = useState(0);
+    const [Name, setName] = useState("");
     const [Age, setAge] = useState(0);
-    const [Address, setAddress] = useState(0);
-    const [PhoneNumber, setPhoneNumber] = useState(0);
-
+    const [Address, setAddress] = useState("");
+    const [PhoneNumber, setPhoneNumber] = useState("");
 
     const load = async () => {
         console.log("load");
@@ -40,22 +39,22 @@ export default function Lookingforhome() {
         Agestorage.writeItem(Age);
         Addressstorage.writeItem(Address);
         Phonenumberstorage.writeItem(PhoneNumber);
-
     };
+
     const reset = () => {
         console.log("reset");
-        // Implement logic to reset state values
         setHeight(0);
         setName("");
         setAge(0);
         setAddress("");
         setPhoneNumber("");
     };
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Enter Your Information</Text>
             <View style={styles.inputContainer}>
-                <Text style={styles.label}>Cat's Name:</Text>
+                <Text style={styles.label}>Your Name:</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => setName(text)}
@@ -71,7 +70,7 @@ export default function Lookingforhome() {
                     value={Age.toString()}
                 />
             </View>
-            <View style={styles.inputContainer}>
+            {/* <View style={styles.inputContainer}>
                 <Text style={styles.label}>Height (cm):</Text>
                 <TextInput
                     style={styles.input}
@@ -79,7 +78,7 @@ export default function Lookingforhome() {
                     onChangeText={(text) => setHeight(parseFloat(text))}
                     value={Height.toString()}
                 />
-            </View>
+            </View> */}
             <View style={styles.inputContainer}>
                 <Text style={styles.label}>Address: </Text>
                 <TextInput
@@ -92,21 +91,15 @@ export default function Lookingforhome() {
                 <Text style={styles.label}>Call:</Text>
                 <TextInput
                     style={styles.input}
-                    keyboardType="Call:" 
-                    onChangeText={(text) => setPhoneNumber(text)} 
-                    value={PhoneNumber} 
+                    keyboardType="phone-pad"
+                    onChangeText={(text) => setPhoneNumber(text)}
+                    value={PhoneNumber}
                 />
             </View>
-            <View style={{ padding:10}}>
-                <Button title="Save" color="blue" onPress={save} style={styles.button} />
+            <View style={styles.buttonContainer}>
+                <Button title="Save" color="#007bff" onPress={save} />
+                <Button title="Reset" color="#dc3545" onPress={reset} />
             </View>
-            <View style={{ padding:10}} >
-                <Button title="Reset" color="red" onPress={reset} />
-            </View>
-
-
-            
-
         </View>
     );
 }
@@ -129,6 +122,7 @@ const styles = StyleSheet.create({
     },
     label: {
         marginRight: 10,
+        width: 100,
     },
     input: {
         borderWidth: 1,
@@ -136,11 +130,9 @@ const styles = StyleSheet.create({
         padding: 8,
         flex: 1,
     },
-    displayContainer: {
+    buttonContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
         marginTop: 20,
-    },
-    displayText: {
-        fontSize: 18,
-        marginBottom: 5,
     },
 });

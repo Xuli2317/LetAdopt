@@ -1,67 +1,147 @@
-import React, { useEffect, useState } from "react";
-import { FlatList, Image, ScrollView, Text, View } from "react-native";
+import React from "react";
+import { FlatList, Image, Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export default function PicKitten(props) {
+    const navigation = useNavigation();
     const tours = [
         {
-            "name": "Newyear",
-            "uri": "https://raw.githubusercontent.com/Xuli2317/Mobile-Application/main/Project/Image%20(5).jpg",
+            "id": "1",
+            "name": "Newton",
+            "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/1.jpg",
             "Age": "1 year",
-            "Height": "20 cm",
-            "Phonenumber": "191",
+            "Weight": "3 Kg.",
+            "Phonenumber": "0984567412",
+            "Address": "Phuket"
+        },
+        {
+            "id": "2",
+            "name": "Bush",
+            "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/2.jpg",
+            "Age": "5 Months",
+            "Weight": "2 Kg.",
+            "Phonenumber": "0855241515",
+            "Address": "Tak"
+        },
+        {
+            "id": "3",
+            "name": "Lydia",
+            "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/3.jpg",
+            "Age": "7 Months",
+            "Weight": "1 Kg.",
+            "Phonenumber": "0654569548",
             "Address": "Bangkok"
         },
         {
-            "name": "Newday",
-            "uri": "https://raw.githubusercontent.com/Xuli2317/Mobile-Application/main/Project/Image%20(4).jpg",
-            "Age": "1 year",
-            "Height": "20 cm",
-            "Phonenumber": "191",
-            "Address": "Bangkok"
-
+            "id": "4",
+            "name": "Cedric",
+            "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/4.jpg",
+            "Age": "11 Months",
+            "Weight": "2.5 Kg.",
+            "Phonenumber": "0856987458",
+            "Address": "Trat"
         },
         {
-            "name": "Kitty",
-            "uri": "https://raw.githubusercontent.com/Xuli2317/Mobile-Application/main/Project/Image%20(3).jpg",
-            "Age": "1 year",
-            "Height": "20 cm",
-            "Phonenumber": "191",
-            "Address": "Bangkok"
-
+            "id": "5",
+            "name": "Medina",
+            "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/5.png",
+            "Age": "8 Months",
+            "Weight": "1.5 Kg.",
+            "Phonenumber": "082123658",
+            "Address": "Chai Nat"
+        },
+        {
+            "id": "6",
+            "name": "Jacobs",
+            "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/6.jpg",
+            "Age": "7 Months",
+            "Weight": "1.8 Kg.",
+            "Phonenumber": "0944587412",
+            "Address": "Buriram"
         }];
 
     return (
-        <ScrollView>
-            
-        
-        <View style={props.style}>
-            <Text style={{ fontSize: 20, textAlign: 'left', color: "black", fontWeight: "bold" }}> 0-1 year Kitten</Text>
+        <View style={styles.container}>
+            <Text style={styles.heading}>0-1 years</Text>
             <FlatList
-                horizontal={true}
-                data={tours}
-                renderItem={
-                    ({ item, index }) => {
-                        console.log(item, index, item.uri);
-                        return (
-                            <View style={{ marginRight: 10 }}>
-                                <Image style={{ width: 200, height: 150, borderRadius: 10, }} source={{ uri: item.uri }} />
-                                <View style={{}}>
-                                    <Text style={{ fontSize: 20, alignSelf: "flex-start", backgroundColor: '#eeeeee', padding: 5, borderRadius: 10, marginTop: 10 }}>Name: {item.name}</Text>
-                                    <Text style={{ fontSize: 15, alignSelf: "flex-start", padding: 5, borderRadius: 10, marginTop: 10 }}>Age: {item.Age}</Text>
-                                    <Text style={{ fontSize: 15, alignSelf: "flex-start", padding: 5, borderRadius: 10, marginTop: 10 }}>Height: {item.Height}</Text>
-                                    <Text style={{ fontSize: 15, alignSelf: "flex-start", padding: 5, borderRadius: 10, marginTop: 10 }}>Addreess: {item.Address}</Text>
-                                    <Text style={{ fontSize: 15, alignSelf: "flex-start", padding: 5, borderRadius: 10, marginTop: 10 }}>PhoneNumber: {item.Phonenumber}</Text>
-                                </View>
-                            </View>
-                        );
-                    }
-                }
-                keyExtractor={item => item.id}
-            /><FlatList>
-            </FlatList>
+                data={tours.slice(0, 3)} // ใช้ slice เพื่อแบ่งข้อมูลเป็นกลุ่มที่มี 3 รายการต่อแถว
+                contentContainerStyle={styles.listContent}
+                renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.card} onPress={() => navigation.navigate("KittenDetail", { id: item.id })}>
+                        <Image style={styles.image} source={{ uri: item.uri }} />
+                        <View style={styles.infoContainer}>
+                            <Text style={styles.name}>{item.name}</Text>
+                        </View>
+                    </TouchableOpacity>
+                )}
+                keyExtractor={(item) => item.id}
+                horizontal
+            />
+            <FlatList
+                data={tours.slice(3, 6)} // ใช้ slice เพื่อแบ่งข้อมูลเป็นกลุ่มที่มี 3 รายการต่อแถว
+                contentContainerStyle={styles.listContent}
+                renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.card} onPress={() => navigation.navigate("KittenDetail", { id: item.id })}>
+                        <Image style={styles.image} source={{ uri: item.uri }} />
+                        <View style={styles.infoContainer}>
+                            <Text style={styles.name}>{item.name}</Text>
+                        </View>
+                    </TouchableOpacity>
+                )}
+                keyExtractor={(item) => item.id}
+                horizontal
+            />
         </View>
-        </ScrollView>
     );
 }
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: 20,
+    },
+    heading: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        textAlign: 'center',
+        color: 'black',
+    },
 
+    listContent: {
+        paddingHorizontal: 10,
+    },
+    card: {
+        marginRight: 20,
+        borderRadius: 10,
+        backgroundColor: '#fff',
+        elevation: 3,
+        width: 250,
+        marginBottom: 20,
+
+    },
+    image: {
+        width: '100%',
+        height: 230,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+    },
+    infoContainer: {
+        padding: 15,
+    },
+    name: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        textAlign: 'center',
+        backgroundColor: 'coral',
+        paddingVertical: 8,
+        borderRadius: 10,
+    },
+    info: {
+        fontSize: 16,
+        marginBottom: 8,
+        color: '#555',
+        marginLeft: 10,
+    },
+});

@@ -12,7 +12,7 @@ export default function Home() {
             <View style={{ backgroundColor: '#eeeeee', padding: 10, borderRadius: 10, marginTop:10 }} >
                 <TextInput style={{ fontSize: 15 }} placeholder="Let's adopt cat!" />
             </View>
-            <View style={{ flexDirection: "row", marginTop: 10, justifyContent: "space-around" }}>
+            <View style={{ flexDirection: "row", marginTop: 30, justifyContent: "space-around" }}>
                 <MyIcon title="Kitten" name="paw" size={30} color="orange" onPress={()=>{ navigation.navigate("Kitten"); }} />
                 <MyIcon title="Adult" name="paw" size={30} color="orange"  onPress={()=>{ navigation.navigate("Adult"); }} />
                 <MyIcon title="Mature" name="paw" size={30} color="orange" onPress={()=>{ navigation.navigate("Mature"); }} />

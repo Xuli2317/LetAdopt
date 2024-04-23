@@ -6,7 +6,14 @@ import Kitten from '../screens/Kitten';
 import Mature from '../screens/Mature';
 import Senior from '../screens/Senior';
 import Information from '../screens/Information';
+import KittenDetail from '../screens/KittenDetail';
+import KittenForm from '../screens/KittenForm';
+import AdultDetail from '../screens/AdultDetail';
+import SeniorDetail from '../screens/SeniorDetail';
+import MatureDetail from '../screens/MatureDetail';
 const Stack = createStackNavigator();
+
+
 export default function HomeStack() {
   return (
     <Stack.Navigator initialRouteName="Main">
@@ -38,11 +45,41 @@ export default function HomeStack() {
       <Stack.Screen
         name="Information"
         component={Information}
-        options={{ title: "Information" }}
+        options={{ title: "Your information" }}
       />
-      
-   
-     </Stack.Navigator>
+      <Stack.Screen
+        name="KittenDetail"
+        component={KittenDetail}
+        options={{ title: "Kitten Detail" }}
+      />
+    
+      <Stack.Screen name="Kitten Form" component={KittenForm} />
+     
+      <Stack.Screen
+        name="AdultDetail"
+        component={AdultDetail}
+        options={{ title: "Adult Detail" }}
+      />
+    
+
+      <Stack.Screen
+        name="MatureDetail"
+        component={MatureDetail}
+        options={{ title: "Mature Detail" }}
+      />
+
+      <Stack.Screen
+        name="SeniorDetail"
+        component={SeniorDetail}
+        options={{ title: "Senior Detail" }}
+      />
+    
+
+
+
+    
+
+    </Stack.Navigator>
   );
 
 
