@@ -1,122 +1,74 @@
-import React, { useEffect, useState } from "react";
-import { Alert, Image, Text, TouchableOpacity, View, StyleSheet } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import KittenStorage from "../storages/KittenStorage";
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function KittenDetail() {
     const navigation = useNavigation();
     const route = useRoute();
     const { id } = route.params;
-    const [pet, setPet] = useState({
-        "id": "1",
-        "name": "Newyear",
-        "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/K/",
-        "Age": "1 year",
-        "Weight": "2 Kg.",
-        "Phonenumber": "191",
-        "Address": "Bangkok"
-    });
+    const [pet, setPet] = useState(null);
 
     useEffect(() => {
         const fetchPet = async () => {
-            if (id === "1") {
-                setPet({
-                    "id": "1",
-                    "name": "Newton",
-                    "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/1.jpg",
-                    "Age": "1 year",
-                    "Weight": "3 Kg.",
-                    "Phonenumber": "0984567412",
-                    "Address": "Phuket"
-                });
-            } else if (id === "2") {
-                setPet({
-                    "id": "2",
-                    "name": "Bush",
-                    "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/2.jpg",
-                    "Age": "5 Months",
-                    "Weight": "2 Kg.",
-                    "Phonenumber": "0855241515",
-                    "Address": "Tak"
-                });
-            } else if (id === "3") {
-                setPet({
-                    "id": "3",
-                    "name": "Lydia",
-                    "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/3.jpg",
-                    "Age": "7 Months",
-                    "Weight": "1 Kg.",
-                    "Phonenumber": "0654569548",
-                    "Address": "Bangkok"
-                });
-            } else if (id === "4") {
-                setPet({
-                    "id": "4",
-                    "name": "Cedric",
-                    "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/4.jpg",
-                    "Age": "11 Months",
-                    "Weight": "2.5 Kg.",
-                    "Phonenumber": "0856987458",
-                    "Address": "Trat"
-                });
-            } else if (id === "5") {
-                setPet({
-                    "id": "5",
-                    "name": "Medina",
-                    "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/5.png",
-                    "Age": "8 Months",
-                    "Weight": "1.5 Kg.",
-                    "Phonenumber": "082123658",
-                    "Address": "Chai Nat"
-                });
-            } else if (id === "6") {
-                setPet({
-                    "id": "6",
-                    "name": "Jacobs",
-                    "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/6.jpg",
-                    "Age": "7 Months",
-                    "Weight": "1.8 Kg.",
-                    "Phonenumber": "0944587412",
-                    "Address": "Buriram"
-                });
+            try {
+                const response = await fetch(`http://localhost:8001/kittens/${id}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+                const data = await response.json();
+                setPet(data);
+            } catch (error) {
+                console.error(error);
             }
         };
 
         fetchPet();
     }, [id]);
 
-
-    //DELETE POPUP    
-    const deleteKiteen = async () => { };
-    const confirmDelete = () => {
-        return Alert.alert("ยืนยันการลบ?", "คุณแน่ใจหรือไม่ว่าจะลบรายการนี้?",
-            [{ text: "ยกเลิก", }, { text: "ยืนยัน", onPress: () => { deleteKiteen(); }, }]);
+    // DELETE POPUP    
+    const deleteKitten = async () => {
+        try {
+            // Implement delete functionality here
+        } catch (error) {
+            console.error(error);
+        }
     };
 
+    const confirmDelete = () => {
+        Alert.alert(
+            'Confirm Delete',
+            'Are you sure you want to delete this item?',
+            [
+                { text: 'Cancel' },
+                { text: 'Confirm', onPress: deleteKitten }
+            ]
+        );
+    };
 
     // TOP RIGHT MENU
     const TopRightMenu = () => (
-        <View style={{ flexDirection: "row", width: 100, justifyContent: "space-around" }}>
-            <TouchableOpacity
-                onPress={() => { navigation.navigate("Main"); }}
-            >
+        <View style={styles.topRightMenuContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate('Main')}>
                 <FontAwesome name="home" size={30} />
             </TouchableOpacity>
-
         </View>
     );
-    const onLoad = async () => {
-        navigation.setOptions({ headerRight: () => (<TopRightMenu />) });
-    };
-    useEffect(() => { onLoad(); }, []);
-    // CONDITIONAL RENDERING
-    if (Object.keys(pet).length == 0) { return <View></View> }
 
+    useEffect(() => {
+        navigation.setOptions({
+            headerRight: () => <TopRightMenu />
+        });
+    }, [navigation]);
+
+    // CONDITIONAL RENDERING
+    if (!pet) {
+        return <View></View>;
+    }
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => { setModalVisible(true); }} >
+            <TouchableOpacity onPress={() => {}}>
                 <View style={styles.imageContainer}>
                     <Image style={styles.image} source={{ uri: pet.uri }} />
                 </View>
@@ -133,6 +85,7 @@ export default function KittenDetail() {
         </View>
     );
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

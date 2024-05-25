@@ -13,15 +13,21 @@ import SeniorDetail from '../screens/SeniorDetail';
 import MatureDetail from '../screens/MatureDetail';
 const Stack = createStackNavigator();
 
-
 export default function HomeStack() {
   return (
     <Stack.Navigator initialRouteName="Main">
       <Stack.Screen
         name="Main"
         component={Main}
-        options={{ title: "Let's adopt!" }}
+        options={{
+          title: "LET ADOPT",
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "#91837a" 
+          }
+        }}
       />
+
       <Stack.Screen
         name="Kitten"
         component={Kitten}
@@ -52,15 +58,15 @@ export default function HomeStack() {
         component={KittenDetail}
         options={{ title: "Kitten Detail" }}
       />
-    
+
       <Stack.Screen name="Kitten Form" component={KittenForm} />
-     
+
       <Stack.Screen
         name="AdultDetail"
         component={AdultDetail}
         options={{ title: "Adult Detail" }}
       />
-    
+
 
       <Stack.Screen
         name="MatureDetail"
@@ -73,12 +79,6 @@ export default function HomeStack() {
         component={SeniorDetail}
         options={{ title: "Senior Detail" }}
       />
-    
-
-
-
-    
-
     </Stack.Navigator>
   );
 

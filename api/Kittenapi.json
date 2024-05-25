@@ -1,0 +1,59 @@
+{
+    "kittens": [
+      {
+        "id": "1",
+        "name": "Newton",
+        "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/1.jpg",
+        "Age": "1 year",
+        "Weight": "3 Kg.",
+        "Phonenumber": "0984567412",
+        "Address": "Phuket"
+      },
+      {
+        "id": "2",
+        "name": "Bush",
+        "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/2.jpg",
+        "Age": "5 Months",
+        "Weight": "2 Kg.",
+        "Phonenumber": "0855241515",
+        "Address": "Tak"
+      },
+      {
+        "id": "3",
+        "name": "Lydia",
+        "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/3.jpg",
+        "Age": "7 Months",
+        "Weight": "1 Kg.",
+        "Phonenumber": "0654569548",
+        "Address": "Bangkok"
+      },
+      {
+        "id": "4",
+        "name": "Cedric",
+        "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/4.jpg",
+        "Age": "11 Months",
+        "Weight": "2.5 Kg.",
+        "Phonenumber": "0856987458",
+        "Address": "Trat"
+      },
+      {
+        "id": "5",
+        "name": "Medina",
+        "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/5.png",
+        "Age": "8 Months",
+        "Weight": "1.5 Kg.",
+        "Phonenumber": "082123658",
+        "Address": "Chai Nat"
+      },
+      {
+        "id": "6",
+        "name": "Jacobs",
+        "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/6.jpg",
+        "Age": "7 Months",
+        "Weight": "1.8 Kg.",
+        "Phonenumber": "0944587412",
+        "Address": "Buriram"
+      }
+    ]
+  }
+  

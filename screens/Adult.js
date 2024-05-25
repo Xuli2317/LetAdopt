@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity, ScrollView, Text, View, StyleSheet, FlatList } from "react-native";
 import { FontAwesome } from '@expo/vector-icons';
-import PicKitty from "../components/PicKitty";
 import { useNavigation } from "@react-navigation/native";
 import { Image } from 'react-native';
 import PicAdult from "../components/PicAdult";

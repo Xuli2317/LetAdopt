@@ -1,5 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const STORAGE_KEY = "@Kittens"; //เปลี่ยนแค่ KEY 
+
+// const url_endpoint = "https://ckartisan.com/api/book";
+// const url_endpoint = "http://192.168.1.90:8081/api/cat";
+
 //ดึงข้อมูลทั้งหมดขึ้นมาแสดง
 const readItems = async () => {
     try {
@@ -9,6 +13,14 @@ const readItems = async () => {
     } catch (error) {
         console.log(error);
     }
+    // try {
+    //     const resp = await fetch(url_endpoint)
+    //     const data = await resp.json()
+    //     console.log(data)
+    //     return data
+    // } catch (error) {
+    //     console.log("error", error);
+    // }
 };
 //ดึงข้อมูลแค่ 1 ชื้นขึ้นมาแสดงตาม item ที่ระบุไว้
 const readItemDetail = async (id) => {
