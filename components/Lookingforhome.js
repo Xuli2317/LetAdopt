@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, StyleSheet, Button } from "react-native";
-import Informationstorage from "../storages/Informationstorage";
+import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from "react-native";
 import Heightstorage from "../storages/Heightstorage";
 import Namestorage from "../storages/Namestorage";
 import Agestorage from "../storages/Agestorage";
 import Addressstorage from "../storages/Addressstorage";
 import Phonenumberstorage from "../storages/Phonenumberstorage";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Lookingforhome() {
     const [Height, setHeight] = useState(0);
@@ -13,6 +13,7 @@ export default function Lookingforhome() {
     const [Age, setAge] = useState(0);
     const [Address, setAddress] = useState("");
     const [PhoneNumber, setPhoneNumber] = useState("");
+    const navigation = useNavigation();
 
     const load = async () => {
         console.log("load");
@@ -54,7 +55,7 @@ export default function Lookingforhome() {
         <View style={styles.container}>
             <Text style={styles.title}>Enter Your Information</Text>
             <View style={styles.inputContainer}>
-                <Text style={styles.label}>Your Name:</Text>
+                <Text style={styles.label}>Name:</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => setName(text)}
@@ -70,17 +71,8 @@ export default function Lookingforhome() {
                     value={Age.toString()}
                 />
             </View>
-            {/* <View style={styles.inputContainer}>
-                <Text style={styles.label}>Height (cm):</Text>
-                <TextInput
-                    style={styles.input}
-                    keyboardType="numeric"
-                    onChangeText={(text) => setHeight(parseFloat(text))}
-                    value={Height.toString()}
-                />
-            </View> */}
             <View style={styles.inputContainer}>
-                <Text style={styles.label}>Address: </Text>
+                <Text style={styles.label}>Address:</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => setAddress(text)}
@@ -88,7 +80,7 @@ export default function Lookingforhome() {
                 />
             </View>
             <View style={styles.inputContainer}>
-                <Text style={styles.label}>Call:</Text>
+                <Text style={styles.label}>Phone:</Text>
                 <TextInput
                     style={styles.input}
                     keyboardType="phone-pad"
@@ -100,20 +92,26 @@ export default function Lookingforhome() {
                 <Button title="Save" color="#007bff" onPress={save} />
                 <Button title="Reset" color="#dc3545" onPress={reset} />
             </View>
+            <TouchableOpacity
+                style={styles.adoptButton}
+                onPress={() => navigation.navigate('Sendinginfo')}
+            >
+                <Text style={styles.buttonText}>Sending your information</Text>
+            </TouchableOpacity>
         </View>
-    );
-}
+    )
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: "#fff",
     },
     title: {
-        fontSize: 24,
+        fontSize: 25,
         fontWeight: "bold",
-        marginBottom: 20,
+        marginBottom: 25,
+        color: "#91837a",
     },
     inputContainer: {
         flexDirection: "row",
@@ -122,7 +120,8 @@ const styles = StyleSheet.create({
     },
     label: {
         marginRight: 10,
-        width: 100,
+        width: 60,
+        textAlign: "right",
     },
     input: {
         borderWidth: 1,
@@ -133,6 +132,18 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
-        marginTop: 20,
+        marginTop: 30,
     },
+    adoptButton: {
+        backgroundColor: '#a4b4aa',
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+        marginTop: 30,
+    },
+    buttonText: {
+        fontSize: 20,
+        color: 'white',
+        fontWeight: 'bold'
+    }
 });

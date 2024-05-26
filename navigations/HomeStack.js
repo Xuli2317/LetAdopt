@@ -7,27 +7,24 @@ import Mature from '../screens/Mature';
 import Senior from '../screens/Senior';
 import Information from '../screens/Information';
 import KittenDetail from '../screens/KittenDetail';
-import KittenForm from '../screens/KittenForm';
 import AdultDetail from '../screens/AdultDetail';
 import SeniorDetail from '../screens/SeniorDetail';
 import MatureDetail from '../screens/MatureDetail';
-const Stack = createStackNavigator();
+import Sendinginfo from '../screens/Sendinginfo';
+import EventAll from '../screens/EventAll';
+import EventDetail from '../screens/EventDetail';
+import ShelterAll from '../screens/ShelterAll';
+import ShelterDetail from '../screens/ShelterDetail';
 
+const Stack = createStackNavigator();
 export default function HomeStack() {
   return (
     <Stack.Navigator initialRouteName="Main">
       <Stack.Screen
         name="Main"
         component={Main}
-        options={{
-          title: "LET ADOPT",
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            color: "#91837a" 
-          }
-        }}
+        options={{ title: "Home" }}
       />
-
       <Stack.Screen
         name="Kitten"
         component={Kitten}
@@ -51,33 +48,52 @@ export default function HomeStack() {
       <Stack.Screen
         name="Information"
         component={Information}
-        options={{ title: "Your information" }}
+        options={{ title: "Adopt cat" }}
       />
       <Stack.Screen
         name="KittenDetail"
         component={KittenDetail}
-        options={{ title: "Kitten Detail" }}
+        options={{ title: "Cat Detail" }}
       />
-
-      <Stack.Screen name="Kitten Form" component={KittenForm} />
-
       <Stack.Screen
         name="AdultDetail"
         component={AdultDetail}
-        options={{ title: "Adult Detail" }}
+        options={{ title: "Cat Detail" }}
       />
-
-
       <Stack.Screen
         name="MatureDetail"
         component={MatureDetail}
-        options={{ title: "Mature Detail" }}
+        options={{ title: "Cat Detail" }}
       />
-
       <Stack.Screen
         name="SeniorDetail"
         component={SeniorDetail}
-        options={{ title: "Senior Detail" }}
+        options={{ title: "Cat Detail" }}
+      />
+      <Stack.Screen
+        name="Sendinginfo"
+        component={Sendinginfo}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="EventAll"
+        component={EventAll}
+        options={{title: "All Event"}}
+      />
+      <Stack.Screen
+        name="EventDetail"
+        component={EventDetail}
+        options={{title: "Event Detail"}}
+      />
+      <Stack.Screen
+        name="ShelterAll"
+        component={ShelterAll}
+        options={{title: "All Shelter"}}
+      />
+      <Stack.Screen
+        name="ShelterDetail"
+        component={ShelterDetail}
+        options={{title: "Shelter Detail"}}
       />
     </Stack.Navigator>
   );

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Image, Text, TouchableOpacity, View, StyleSheet, ScrollView } from "react-native";
+import { Alert, Image, Text, TouchableOpacity, View, StyleSheet, ScrollView, Button } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-export default function AdultDetail() {
+export default function ShelterDetail() {
     const navigation = useNavigation();
     const route = useRoute();
     const { id } = route.params;
@@ -11,91 +11,64 @@ export default function AdultDetail() {
         "id": "1",
         "name": "Newyear",
         "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/K/",
-        "Age": "1 year",
-        "Weight": "2 Kg.",
-        "Phonenumber": "191",
-        "Address": "Bangkok"
+        "contact": '19 may 2024'
     });
 
     useEffect(() => {
-        const fetchPet = async () => {
-            if (id === "1") {
+        const fetchEvent = async () => {
+            if (id == "1") {
                 setPet({
-                    "id": "1",
-                    "name": "Cody",
-                    "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Adult/Pictures/1.jpg",
-                    "Age": "6 years",
-                    "Weight": "5 Kg.",
-                    "Gender": "Male",
-                    "Phonenumber": "022587451",
-                    "Address": "Loei"
+                    "id": 1,
+                    "name": "Thai Love Animal Foundation",
+                    "contact": "thailoveanimal (IG)",
+                    "uri": "https://th.bing.com/th/id/OIP.zM_ZlsAl1q4keKI5LExtiQHaHZ?rs=1&pid=ImgDetMain"
                 });
-            } else if (id === "2") {
-                setPet( {
-                    "id": "2",
-                    "name": "Themis",
-                    "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Adult/Pictures/2.jpg",
-                    "Age": "4 years",
-                    "Weight": "4 Kg.",
-                    "Gender": "Male",
-                    "Phonenumber": "0965412356",
-                    "Address": "Bangkok"
-                });
-            } else if (id === "3") {
+            } else if (id == "2") {
                 setPet({
-                    "id": "3",
-                    "name": "Aura",
-                    "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Adult/Pictures/3.jpg",
-                    "Age": "2 years",
-                    "Weight": "3 Kg.",
-                    "Gender": "Female",
-                    "Phonenumber": "0858548632",
-                    "Address": "Bangkok"
+                    "id": 2,
+                    "name": "Adopt me Please",
+                    "contact": "adopt_me_please@hotmail.com",
+                    "uri": "https://th.bing.com/th/id/OIP.PUT7V-HvF8lyfmbI0P0WIAHaHa?rs=1&pid=ImgDetMain"
                 });
-            } else if (id === "4") {
+            } else if (id == "3") {
                 setPet({
-                    "id": "4",
-                    "name": "Carmen",
-                    "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Adult/Pictures/4.jpg",
-                    "Age": "3 years",
-                    "Weight": "4 Kg.",
-                    "Gender": "Male",
-                    "Phonenumber": "0821236959",
-                    "Address": "Kalasin"
+                    "id": 3,
+                    "name": "rakmaw",
+                    "contact": "www.rakmaw.com",
+                    "uri": "https://th.bing.com/th/id/OIP.ojR4j8O2-gcQD5dv_oJW0gAAAA?rs=1&pid=ImgDetMain"
                 });
-            } else if (id === "5") {
-                setPet( {
-                    "id": "5",
-                    "name": "Olinda",
-                    "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Adult/Pictures/5.jpg",
-                    "Age": "5 years",
-                    "Weight": "4 Kg.",
-                    "Gender": "Female",
-                    "Phonenumber": "083254123",
-                    "Address": "Lamphun"
-                });
-            } else if (id === "6") {
+            } else if (id == "4") {
                 setPet({
-                    "id": "6",
-                    "name": "Reet",
-                    "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Adult/Pictures/6.png",
-                    "Age": "5 years",
-                    "Weight": "3 Kg.",
-                    "Gender": "Female",
-                    "Phonenumber": "0957485645",
-                    "Address": "Nan"
+                    "id": 4,
+                    "name": "RightBaan ",
+                    "contact": "www.RightBaan.com",
+                    "uri": "https://th.bing.com/th/id/OIP.41G-mtw31c27Fg6t-vOtsQAAAA?rs=1&pid=ImgDetMain"
+                });
+            } else if (id == "5") {
+                setPet({
+                    "id": 5,
+                    "name": " Catster by Kingdom of Tigers ",
+                    "contact": "www.catsterclub.com",
+                    "uri": "https://play-lh.googleusercontent.com/tWsdJR1xj2wC6uDofJFz4O7R0APe9JWLH0BIXrMheoOmUGbETbSVCRDeXiGKk15ozGPN"
+                });
+            } else if (id == "6") {
+                setPet({
+                    "id": 6,
+                    "name": "Cat Lumpini  ",
+                    "contact": "www.instagram.com/cat_lumpini",
+                    "uri": "https://i.pinimg.com/736x/6a/b7/fa/6ab7fafed3d120b77c3f010782654631.jpg"
                 });
             }
         };
 
-        fetchPet();
+        fetchEvent();
     }, [id]);
 
     //DELETE POPUP    
-    const deleteAdult = async () => { };
+    const deleteKiteen = async () => { };
     const confirmDelete = () => {
         return Alert.alert("ยืนยันการลบ?", "คุณแน่ใจหรือไม่ว่าจะลบรายการนี้?",
-            [{ text: "ยกเลิก", }, { text: "ยืนยัน", onPress: () => { deleteAdult(); }, }]);
+            [{ text: "ยกเลิก", }, { text: "ยืนยัน", onPress: () => { deleteKiteen(); }, }]);
     };
 
     // TOP RIGHT MENU
@@ -104,7 +77,7 @@ export default function AdultDetail() {
             <TouchableOpacity
                 onPress={() => { navigation.navigate("Main"); }}
             >
-                <FontAwesome name="home" size={30} />
+                <FontAwesome name="home" size={28} />
             </TouchableOpacity>
 
         </View>
@@ -116,6 +89,7 @@ export default function AdultDetail() {
     // CONDITIONAL RENDERING
     if (Object.keys(pet).length == 0) { return <View></View> }
 
+
     return (
         <ScrollView style={styles.container}>
             <TouchableOpacity onPress={() => { setModalVisible(true); }} >
@@ -126,11 +100,7 @@ export default function AdultDetail() {
             <View style={styles.infoContainer}>
                 <Text style={styles.petName}>{pet.name}</Text>
                 <View style={{ flexDirection: "column" }}>
-                    <Text style={styles.infoText}>Gender: {pet.Gender}</Text>
-                    <Text style={styles.infoText}>Age: {pet.Age}</Text>
-                    <Text style={styles.infoText}>Weight: {pet.Weight}</Text>
-                    <Text style={styles.infoText}>Address: {pet.Address}</Text>
-                    <Text style={styles.infoText}>Phone Number: {pet.Phonenumber}</Text>
+                    <Text style={styles.infoText}>contact: {pet.contact}</Text>
                 </View>
             </View>
             <TouchableOpacity
@@ -189,17 +159,17 @@ const styles = StyleSheet.create({
     },
     menuItem: {
         paddingHorizontal: 10,
-        },
+    },
     adoptButton: {
         backgroundColor: '#a4b4aa',
         padding: 15,
         borderRadius: 5,
         alignItems: 'center',
-        marginTop: 110,
-        },
+        marginTop: 200,
+    },
     buttonText: {
         fontSize: 20,
         color: 'white',
         fontWeight: 'bold',
-        },
-    });
+    },
+});

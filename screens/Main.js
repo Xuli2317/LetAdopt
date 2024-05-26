@@ -1,10 +1,9 @@
 import React from "react";
-import { Button, ScrollView, View, StyleSheet, TextInput } from "react-native";
+import { ScrollView, View, StyleSheet, TextInput, Text, TouchableOpacity } from "react-native";
 import Cover from "../components/Cover";
 import Home from "../components/Home";
 import { useNavigation } from "@react-navigation/native";
-import MyIcon from "../components/MyIcon";
-import Information from "./Information";
+import Event from "../components/Event";
 
 export default function Main() {
     const navigation = useNavigation();
@@ -19,12 +18,23 @@ export default function Main() {
                     />
                 </View>
             </View>
-
             <View style={styles.section}>
                 <Cover />
             </View>
             <Home />
-        
+            <View style={styles.separator} />
+            <View style={styles.eventContainer}>
+                <TouchableOpacity onPress={() => navigation.navigate("EventAll")}>
+                    <Text style={styles.text}> See All Event </Text>
+                </TouchableOpacity>
+            </View>
+            <Event />
+            <TouchableOpacity
+                style={styles.adoptButton}
+                onPress={() => navigation.navigate('ShelterAll')}
+            >
+                <Text style={styles.buttonText}>Cat Shelter in Thailand</Text>
+            </TouchableOpacity>
         </ScrollView>
     );
 }
@@ -32,7 +42,7 @@ export default function Main() {
 const styles = StyleSheet.create({
     scrollViewContent: {
         flexGrow: 1,
-        padding: 10
+        padding: 10,
     },
     searchContainer: {
         padding: 10,
@@ -52,13 +62,33 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingVertical: 10,
     },
-
-    container: {
-        flex: 1,
-        padding: 10,
+    text: {
+        fontSize: 30,
+        marginLeft: 3,
+        fontWeight: "bold",
+        marginBottom: 5,
+        color: '#91837a',
     },
     section: {
         marginHorizontal: 10,
         marginBottom: 10,
+        marginTop: 5,
+    },
+    separator: {
+        borderBottomWidth: 2,
+        borderBottomColor: '#a4b4aa',
+        marginVertical: 20,
+    },
+    adoptButton: {
+        backgroundColor: '#a4b4aa',
+        padding: 15,
+        borderRadius: 5,
+        alignItems: 'center',
+        marginTop: 20,
+    },
+    buttonText: {
+        fontSize: 20,
+        color: 'white',
+        fontWeight: '600',
     },
 });

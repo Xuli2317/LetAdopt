@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Image, Text, TouchableOpacity, View, StyleSheet } from "react-native";
+import { Alert, Image, Text, TouchableOpacity, View, StyleSheet, ScrollView } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
@@ -27,6 +27,7 @@ export default function MatureDetail() {
                     "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Mature/Pictures/1.jpg",
                     "Age": "11 years",
                     "Weight": "4 Kg.",
+                    "Gender": "Male",
                     "Phonenumber": "0984567412",
                     "Address": "Nakhin Pathom"
                 });
@@ -37,6 +38,7 @@ export default function MatureDetail() {
                     "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Mature/Pictures/2.jpg",
                     "Age": "12 years",
                     "Weight": "4.2 Kg.",
+                    "Gender": "Female",
                     "Phonenumber": "0855241515",
                     "Address": "Saraburi"
                 });
@@ -47,6 +49,7 @@ export default function MatureDetail() {
                     "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Mature/Pictures/3.png",
                     "Age": "12 years",
                     "Weight": "4.3 Kg.",
+                    "Gender": "Female",
                     "Phonenumber": "023521265",
                     "Address": "Bangkok"
                 });
@@ -57,6 +60,7 @@ export default function MatureDetail() {
                     "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Mature/Pictures/4.jpg",
                     "Age": "10 years",
                     "Weight": "3.9 Kg.",
+                    "Gender": "Female",
                     "Phonenumber": "023521265",
                     "Address": "Bangkok"
                 });
@@ -67,6 +71,7 @@ export default function MatureDetail() {
                     "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Mature/Pictures/5.png",
                     "Age": "8 years",
                     "Weight": "5 Kg.",
+                    "Gender": "Male",
                     "Phonenumber": "023521265",
                     "Address": "Krabi"
                 });
@@ -77,6 +82,7 @@ export default function MatureDetail() {
                     "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Mature/Pictures/6.jpg",
                     "Age": "7 years",
                     "Weight": "5.5 Kg.",
+                    "Gender": "Female",
                     "Phonenumber": "086547451",
                     "Address": "Yala"
                 });
@@ -86,14 +92,12 @@ export default function MatureDetail() {
         fetchPet();
     }, [id]);
 
-
     //DELETE POPUP    
     const deleteKiteen = async () => { };
     const confirmDelete = () => {
         return Alert.alert("ยืนยันการลบ?", "คุณแน่ใจหรือไม่ว่าจะลบรายการนี้?",
             [{ text: "ยกเลิก", }, { text: "ยืนยัน", onPress: () => { deleteKiteen(); }, }]);
     };
-
 
     // TOP RIGHT MENU
     const TopRightMenu = () => (
@@ -113,9 +117,8 @@ export default function MatureDetail() {
     // CONDITIONAL RENDERING
     if (Object.keys(pet).length == 0) { return <View></View> }
 
-
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <TouchableOpacity onPress={() => { setModalVisible(true); }} >
                 <View style={styles.imageContainer}>
                     <Image style={styles.image} source={{ uri: pet.uri }} />
@@ -124,13 +127,20 @@ export default function MatureDetail() {
             <View style={styles.infoContainer}>
                 <Text style={styles.petName}>{pet.name}</Text>
                 <View style={{ flexDirection: "column" }}>
+                    <Text style={styles.infoText}>Gender: {pet.Gender}</Text>
                     <Text style={styles.infoText}>Age: {pet.Age}</Text>
                     <Text style={styles.infoText}>Weight: {pet.Weight}</Text>
                     <Text style={styles.infoText}>Address: {pet.Address}</Text>
                     <Text style={styles.infoText}>Phone Number: {pet.Phonenumber}</Text>
                 </View>
             </View>
-        </View>
+            <TouchableOpacity
+                style={styles.adoptButton}
+                onPress={() => navigation.navigate('Information')}
+            >
+                <Text style={styles.buttonText}>Adopt cat</Text>
+            </TouchableOpacity>
+        </ScrollView>
     );
 }
 const styles = StyleSheet.create({
@@ -146,31 +156,33 @@ const styles = StyleSheet.create({
     },
     image: {
         width: 300,
-        height: 400,
+        height: 300,
         resizeMode: "cover",
         borderRadius: 10,
     },
     infoContainer: {
         paddingHorizontal: 20,
         paddingBottom: 20,
-        backgroundColor: "#f0f0f0",
         borderRadius: 10,
+        borderColor: '#a4b4aa',
+        borderWidth: 2.5,
+        borderRadius: 15,
     },
     petName: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginTop: 20,
+        marginTop: 10,
         marginBottom: 10,
-        textAlign: 'center',
-        backgroundColor: 'coral',
+        textAlign: 'left',
         paddingVertical: 8,
         borderRadius: 10,
+
     },
     infoText: {
         fontSize: 18,
         marginBottom: 8,
         color: '#555',
-        textAlign: 'center',
+        textAlign: 'left',
     },
     topRightMenuContainer: {
         flexDirection: "row",
@@ -178,5 +190,17 @@ const styles = StyleSheet.create({
     },
     menuItem: {
         paddingHorizontal: 10,
+    },
+    adoptButton: {
+        backgroundColor: '#a4b4aa',
+        padding: 15,
+        borderRadius: 5,
+        alignItems: 'center',
+        marginTop: 110,
+    },
+    buttonText: {
+        fontSize: 20,
+        color: 'white',
+        fontWeight: 'bold',
     },
 });

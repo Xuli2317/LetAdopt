@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet, ScrollView } from "react-native";
 import Lookingforhome from "../components/Lookingforhome";
 
-
 export default function Information() {
-
     return (
         <ScrollView style={styles.container}>
-            <Lookingforhome />
-            
+            <Lookingforhome />     
         </ScrollView>
     );
 }

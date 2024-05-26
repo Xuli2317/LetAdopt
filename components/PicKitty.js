@@ -1,147 +1,116 @@
-import React from "react";
-import { FlatList, Image, Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import { FlatList, Image, Text, View, StyleSheet, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 export default function PicKitten(props) {
     const navigation = useNavigation();
-    const tours = [
-        {
-            "id": "1",
-            "name": "Newton",
-            "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/1.jpg",
-            "Age": "1 year",
-            "Weight": "3 Kg.",
-            "Phonenumber": "0984567412",
-            "Address": "Phuket"
-        },
-        {
-            "id": "2",
-            "name": "Bush",
-            "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/2.jpg",
-            "Age": "5 Months",
-            "Weight": "2 Kg.",
-            "Phonenumber": "0855241515",
-            "Address": "Tak"
-        },
-        {
-            "id": "3",
-            "name": "Lydia",
-            "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/3.jpg",
-            "Age": "7 Months",
-            "Weight": "1 Kg.",
-            "Phonenumber": "0654569548",
-            "Address": "Bangkok"
-        },
-        {
-            "id": "4",
-            "name": "Cedric",
-            "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/4.jpg",
-            "Age": "11 Months",
-            "Weight": "2.5 Kg.",
-            "Phonenumber": "0856987458",
-            "Address": "Trat"
-        },
-        {
-            "id": "5",
-            "name": "Medina",
-            "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/5.png",
-            "Age": "8 Months",
-            "Weight": "1.5 Kg.",
-            "Phonenumber": "082123658",
-            "Address": "Chai Nat"
-        },
-        {
-            "id": "6",
-            "name": "Jacobs",
-            "uri": "https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/6.jpg",
-            "Age": "7 Months",
-            "Weight": "1.8 Kg.",
-            "Phonenumber": "0944587412",
-            "Address": "Buriram"
-        }];
+    const [kittens, setKittens] = useState([]);
+
+    const loadKittens = async () => {
+        try {
+            let response = await fetch('https://raw.githubusercontent.com/Xuli2317/Pictures/main/Kitten/Pictures/Api.json');
+            let data = await response.json();
+            setKittens(data);
+        } catch (error) {
+            console.error("Error loading kittens:", error);
+        }
+    };
+
+    useEffect(() => {
+        loadKittens();
+    }, []);
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.heading}>0-1 years</Text>
+        <ScrollView style={styles.container}>
+            <View style={styles.searchBox}>
+                <TextInput
+                    style={styles.searchInput}
+                    placeholder="Search..."
+                    placeholderTextColor="#91837a"
+                />
+            </View>
             <FlatList
-                data={tours.slice(0, 3)} // ใช้ slice เพื่อแบ่งข้อมูลเป็นกลุ่มที่มี 3 รายการต่อแถว
+                data={kittens}
                 contentContainerStyle={styles.listContent}
                 renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.card} onPress={() => navigation.navigate("KittenDetail", { id: item.id })}>
+                    <TouchableOpacity
+                        style={styles.card}
+                        onPress={() => navigation.navigate("KittenDetail", { id: item.id })}
+                    >
                         <Image style={styles.image} source={{ uri: item.uri }} />
                         <View style={styles.infoContainer}>
                             <Text style={styles.name}>{item.name}</Text>
+                            <Text style={styles.details}>{item.Gender}, {item.Age}</Text>
+                            <Text style={styles.location}>{item.Address}</Text>
                         </View>
                     </TouchableOpacity>
                 )}
                 keyExtractor={(item) => item.id}
-                horizontal
+                numColumns={2}
+                scrollEnabled={false}
             />
-            <FlatList
-                data={tours.slice(3, 6)} // ใช้ slice เพื่อแบ่งข้อมูลเป็นกลุ่มที่มี 3 รายการต่อแถว
-                contentContainerStyle={styles.listContent}
-                renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.card} onPress={() => navigation.navigate("KittenDetail", { id: item.id })}>
-                        <Image style={styles.image} source={{ uri: item.uri }} />
-                        <View style={styles.infoContainer}>
-                            <Text style={styles.name}>{item.name}</Text>
-                        </View>
-                    </TouchableOpacity>
-                )}
-                keyExtractor={(item) => item.id}
-                horizontal
-            />
-        </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 20,
+        paddingHorizontal: 3,
     },
-    heading: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 20,
-        textAlign: 'center',
-        color: 'black',
-    },
-
-    listContent: {
+    searchBox: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderColor: '#a4b4aa',
+        borderWidth: 2.5,
+        borderRadius: 15,
         paddingHorizontal: 10,
+        width: '100%',
+        marginTop: 10,
+        marginBottom: 10,
+    },
+    searchInput: {
+        fontSize: 15,
+        flex: 1,
+        paddingVertical: 10,
+    },
+    listContent: {
     },
     card: {
-        marginRight: 20,
+        flex: 1,
+        margin: 10,
         borderRadius: 10,
         backgroundColor: '#fff',
         elevation: 3,
-        width: 250,
-        marginBottom: 20,
-
+        width: '60%',
+        overflow: 'hidden',
     },
     image: {
         width: '100%',
-        height: 230,
+        height: 100,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
     },
     infoContainer: {
-        padding: 15,
+        padding: 10,
     },
     name: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
-        marginBottom: 10,
-        textAlign: 'center',
-        backgroundColor: 'coral',
-        paddingVertical: 8,
+        marginBottom: 5,
+        textAlign: 'left',
         borderRadius: 10,
+        color: 'black',
     },
-    info: {
+    details: {
         fontSize: 16,
-        marginBottom: 8,
-        color: '#555',
-        marginLeft: 10,
+        marginBottom: 5,
+        textAlign: 'left',
+        color: '#333',
+    },
+    location: {
+        fontSize: 14,
+        textAlign: 'left',
+        color: '#777',
     },
 });
